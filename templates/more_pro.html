@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="block m">
+
+        {% for i in title_pro reversed %}
+        <div class="card mb-3" style="max-width: 100%;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{i.3}}" class="card-img-top "
+                        style="background-size:cover; width:150px ; height: 200px;" alt="...">
+                </div>
+                <div class="col-md-8 d-flex">
+                    <div class="card-body">
+                        <h5 class="card-title  mb-3">{{i.1}}</h5>
+                        <p class="card-text mb-2">{{i.2}}</p>
+                        <p class="card-text ">Size: {{i.5}}</p>
+                        <p class="card-text">color: {{i.8}}</p>
+                        <div class="b d-flex">
+                           <div class="d-flex" style="justify-content:space-between">
+                            <a href="{% url 'addElect' id=i.0 %}" class="btn btn-primary mb-3">
+                                <i class="fa-regular fa-heart"></i>
+                                Save for later
+                            </a>
+                        </div> 
+                        <div class="d-flex" style="justify-content:space-between; margin-left: 15px;">
+                            <a href="{% url 'addCart' id=i.0 %}" class="btn btn-primary mb-3">
+                                {{i.4}} $
+                            </a>
+                        </div>
+                        </div>
+                        
+                    </div>
+                    <div class="p-3">
+                        <a href="{% url 'main' %}"><i class="fa-sharp fa-solid fa-xmark"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="bag " style=" margin: 5px 0 5px 0; font-size:2rem ; display: flex; justify-content: center; ">
+        Brend
+    </div>
+    <div class="block" style="display: flex; justify-content: space-evenly; flex-wrap: wrap; gap: 3px; margin-top: 20px;">
+        {% for i in brend_pro reversed%}
+        <div class="card" style="width: 16rem; background-color: rgba(163, 148, 188, 0.689); ">
+            <div class="img_1 " style="display: flex; justify-content: center; align-items: center; margin-top: 5px;">
+                <img src="{{ i.3 }}" class="card-img-top" style="width: 250px; height:300px; " alt="...">
+            </div>
+
+            <div class="card-body">
+                <u class="d-flex" style="list-style:none ; justify-content: space-between; align-items:center; ">
+                    <li class="nav-item">
+                        <a class="nav" style="margin:5px 0 5px 0 ; font-size: 1.2rem;" style="color:black"
+                            href="#">{{i.1}}</a>
+                    </li>
+                    <li><a href="{% url 'addElect' id=i.0 %}">
+                            {% if i.0 is not elec_session %}
+                            <i class="fa-regular fa-heart" style="color:black"></i>
+                            {% else%}
+                            <i class="fa-solid fa-heart"></i>
+                            {% endif %}
+
+                        </a></li>
+                </u>
+                <a href="{% url 'addCart' id=i.0 %}" class="btn btn-primary w-100">{{i.4}} $</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

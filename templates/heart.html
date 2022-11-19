@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="block" style="display: flex; justify-content: space-evenly; flex-wrap: wrap; gap: 7px;">
+    {% for i in products_cart reversed %}
+    <div class="card" style="width: 17rem; background-color: rgba(163, 148, 188, 0.689); ">
+        <div class="img_1 " style="display: flex; justify-content: center; align-items: center; margin-top: 5px;">
+            <img src="{{ i.3 }}"
+            class="card-img-top" style="width: 250px; height:300px; " alt="...">
+        </div>
+        
+        <div class="card-body">
+            <u class="d-flex" style="list-style:none ; justify-content: space-between; align-items:center; ">
+                <li class="nav-item">
+                    <a class="nav" style="margin:5px 0 5px 0 ; font-size: 1.2rem;" style="color:black" href="#">{{ i.1 }}</a>
+                </li>
+                <li><a href="{% url 'removeElected' id=i.0 %} "><i class="fa-solid fa-heart"></i></a></li>
+            </u>
+            <a href="{% url 'addCart' id=i.0 %}" class="btn btn-primary w-100">{{i.4}} $</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
